@@ -1,11 +1,10 @@
 library(tidyr)
-.libPaths(c(.libPaths(), "packages"))
 library(devtools)
 
 library(ggplot2)
 if (!require(markoffchains)) {
   #devtools::install("packages/markoffchains")
-  install.packages("markoffchains", repos = NULL, type = "source", lib = "packages")
+  devtools::install_github("https://github.com/arqamrp/markoff/markoffchains", upgrade = TRUE)
 }
 
 library(markoffchains)
