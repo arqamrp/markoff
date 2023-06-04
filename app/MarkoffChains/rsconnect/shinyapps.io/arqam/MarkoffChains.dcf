@@ -1,0 +1,13 @@
+name: MarkoffChains
+title: MarkoffChains
+username:
+account: arqam
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9244265
+bundleId: 7302572
+url: https://arqam.shinyapps.io/MarkoffChains/
+when: 1685884342.08948
+lastSyncTime: 1685884342.08952
+asMultiple: FALSE
+asStatic: FALSE
