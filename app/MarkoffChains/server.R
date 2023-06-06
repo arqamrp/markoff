@@ -32,11 +32,36 @@ function(input, output, session) {
         selectizeInput(
           "func",
           "What would you like to compute?",
-          c("Communicating classes"="comm", "Absorbing states"="abs", "Reachable states"= "reach")
+          c("Communicating classes"="comm", "Absorbing states"="abs", "Reachable states"= "reach", "Configuration after n steps" = "n_steps", "Steady state configuration" = "steady")
         ) 
         
       }
     )
+    
+    output$extra <- renderUI(
+      {
+        if(input$func == "n_steps"){
+          numericInput(
+            "n",
+            "Number of steps",
+            value = 2,
+            min = 1,
+            max = 1e5,
+            step = 1
+          )
+        }
+        else if(input$func == "steady"){
+          selectizeInput(
+            "subfunc",
+            "What exactly?",
+            c("Stationary matrix"="stat", "Returning probabilities"="rtrn", "Class probabilities"= "class")
+          ) 
+          
+        }
+        
+      }
+    )
+    
     
     output$checkMtx <- renderText({
       if(is_stochastic(input$matrix2)) print("Good to go, the matrix is a valid transition probability matrix.")
@@ -53,6 +78,26 @@ function(input, output, session) {
             if(str != "Absorbing state(s):") str
             else "No absorbing states"
           }
+          else if(input$func == "n_steps"){
+            mtx = input$matrix2;
+            for(i in 1:input$n -1){
+              mtx = mtx %*% input$matrix2
+            }
+            mtx
+          }
+          else if(input$func == "steady"){
+            if(input$subfunc == "stat"){
+              steady_state(input$matrix2)
+            }
+            else if(input$subfunc == "rtrn"){
+              steady_return_probs(input$matrix2)
+            }
+            else if(input$subfunc == "class"){
+              list(comm_classes(input$matrix2, mode = "list") ,steady_class_probs(input$matrix2))
+            }
+            
+          }
+          
         }
       })
     
@@ -121,6 +166,7 @@ function(input, output, session) {
             
             ggp
           }
+          
           
           plotBinaryMatrix(access(input$matrix2))
           

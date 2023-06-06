@@ -1,8 +1,7 @@
 Package: markoffchains
 Title: COMPUTATIONALLY DESCRIBING MARKOV CHAINS
 Version: 0.0.0.9000
-Authors@R: 
-    person("Arqam", "Patel", , "arqamrp21@iitk.ac.in", role = c("aut", "cre"),
+Authors@R: person("Arqam", "Patel", , "arqamrp21@iitk.ac.in", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Simple functions for computing properties of discrete time space, finite state space Markov chains.
 License: MIT + file LICENSE

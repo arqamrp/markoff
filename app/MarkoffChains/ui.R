@@ -19,8 +19,8 @@ fluidPage(
           ),
           
           uiOutput("MtxIn"), # Issue no. 1: fractional input incompatible due to floatinig point imprecision
-          uiOutput("mode")
-          
+          uiOutput("mode"),
+          uiOutput("extra")
         ),
 
         # Show a plot of the generated distribution
