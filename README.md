@@ -7,6 +7,20 @@ The markoffchains folder contains the package files.
 
 ### Some functions available on the Shiny app
 
+
 #### Communicating classes
 
 ![](/assets/comm_classes.png)
+
+#### Reachable states
+
+![](/assets/access.png)
+
+#### Stationary matrix
+
+![](/assets/stat.png)
+
+#### Returning probabilities (lim(n->inf) p_jj n)
+
+![](/assets/rtrn.png)
+
