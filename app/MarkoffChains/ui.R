@@ -26,6 +26,7 @@ fluidPage(
         # Show a plot of the generated distribution
         mainPanel(
             textOutput("checkMtx"),
+            textOutput("desc"),
             verbatimTextOutput("verbatim"),
             plotOutput("visual")
           

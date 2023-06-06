@@ -4,11 +4,11 @@ library(devtools)
 library(ggplot2)
 
 if (!require(markoffchains)) {
-  devtools::install_github("https://github.com/arqamrp/markoff/markoffchains", upgrade = TRUE)
+  devtools::install_github("arqamrp/markoff", subdir = "markoffchains")
 }
 
 library(markoffchains)
-library(ggcorrplot)
+
 library(shiny)
 library(shinyMatrix)
 
@@ -32,7 +32,7 @@ function(input, output, session) {
         selectizeInput(
           "func",
           "What would you like to compute?",
-          c("Communicating classes"="comm", "Absorbing states"="abs", "Reachable states"= "reach", "Configuration after n steps" = "n_steps", "Steady state configuration" = "steady")
+          c("Steady state configuration" = "steady", "Communicating classes"="comm", "Absorbing states"="abs", "Reachable states"= "reach", "Configuration after n steps" = "n_steps")
         ) 
         
       }
@@ -64,9 +64,21 @@ function(input, output, session) {
     
     
     output$checkMtx <- renderText({
-      if(is_stochastic(input$matrix2)) print("Good to go, the matrix is a valid transition probability matrix.")
-      else print("Oops, your matrix isn't a valid transition probability matrix.")
+      if(!is_stochastic(input$matrix2)) print("Oops, your matrix isn't a valid transition probability matrix.")
     })
+    
+    output$desc <- renderText(
+      {
+        if(is_stochastic(input$matrix2)){
+          if(input$func == "n_steps") "Probabilities of each state after n time steps"
+          else if(input$func == "steady"){
+            if(input$subfunc == "stat") "Probabilities of each state after infinite time"
+            else if(input$subfunc == "class") "Probabilities of being in each class after infinite steps"
+            else if(input$subfunc == "rtrn") "Probabilities of returning to the initial state after infinite time"
+          }
+        }
+      }
+    )
     
     output$verbatim <- renderPrint({
         if(is_stochastic(input$matrix2)){
@@ -90,10 +102,10 @@ function(input, output, session) {
               steady_state(input$matrix2)
             }
             else if(input$subfunc == "rtrn"){
-              steady_return_probs(input$matrix2)
+              list( steady_return_probs(input$matrix2))
             }
             else if(input$subfunc == "class"){
-              list(Class = comm_classes(input$matrix2, mode = "list") , Probabilities = steady_class_probs(input$matrix2))
+              list( Class = comm_classes(input$matrix2, mode = "list") , Probabilities = steady_class_probs(input$matrix2))
             }
             
           }
