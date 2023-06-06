@@ -93,7 +93,7 @@ function(input, output, session) {
               steady_return_probs(input$matrix2)
             }
             else if(input$subfunc == "class"){
-              list(comm_classes(input$matrix2, mode = "list") ,steady_class_probs(input$matrix2))
+              list(Classes= comm_classes(input$matrix2, mode = "list") , probabilities = steady_class_probs(input$matrix2))
             }
             
           }
