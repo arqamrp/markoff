@@ -1,6 +1,6 @@
 # markoff
 
-A R package and accompanying web app for computing properties of discrete time space Markov Chains
+A R package (markoffchains) and accompanying web app for computing properties of discrete time space Markov Chains
 
 The RShiny app is available at [https://arqam.shinyapps.io/markoff](https://arqam.shinyapps.io/markoff).
 The markoffchains folder contains the package files.
@@ -14,7 +14,7 @@ The markoffchains folder contains the package files.
 ```
   devtools::install_github("arqamrp/markoff", subdir = "markoffchains")
 ```
-
+4. Load the library using `library(markoffchains)` for use.
 
 
 ### Some functions available on the Shiny app
