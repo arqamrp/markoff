@@ -4,7 +4,7 @@ library(shiny)
 fluidPage(
 
     # Application title
-    titlePanel("Markoff Chains"),
+    titlePanel("Markoff"),
 
     # Sidebar with a slider input for number of bins
     sidebarLayout(
