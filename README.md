@@ -9,4 +9,4 @@ The markoffchains folder contains the package files.
 
 #### Communicating classes
 
-!(/assets/comm_classes.png)
+![](/assets/comm_classes.png)
