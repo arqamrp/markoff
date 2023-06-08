@@ -1,14 +1,17 @@
 library(shiny)
 
-# Define UI for application that draws a histogram
+
 fluidPage(
-
+    
     # Application title
-    titlePanel("Markoff"),
+    titlePanel(span(img(src = "logo.png", height = 55), "Markoff")),
 
-    # Sidebar with a slider input for number of bins
     sidebarLayout(
+      
         sidebarPanel(
+          
+          tags$a(href = "https://github.com/arqamrp/markoff", "Source code"),
+          tags$h1(),
           numericInput(
             inputId = "n_states",
             label = "Number of states",
@@ -20,10 +23,11 @@ fluidPage(
           
           uiOutput("MtxIn"), # Issue no. 1: fractional input incompatible due to floatinig point imprecision
           uiOutput("mode"),
-          uiOutput("extra")
+          uiOutput("extra"),
+          tags$a(href = "https://arqamrp.github.io", "Arqam Patel"),
+          tags$h6("2023")
         ),
 
-        # Show a plot of the generated distribution
         mainPanel(
             textOutput("checkMtx"),
             textOutput("desc"),

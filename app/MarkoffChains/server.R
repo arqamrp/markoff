@@ -13,7 +13,6 @@ library(shiny)
 library(shinyMatrix)
 
 function(input, output, session) {
-
     output$MtxIn <- renderUI(
       {
         matrixInput("matrix2", 
@@ -64,7 +63,7 @@ function(input, output, session) {
     
     
     output$checkMtx <- renderText({
-      if(!is_stochastic(input$matrix2)) print("Oops, your matrix isn't a valid transition probability matrix.")
+      if(!is_stochastic(input$matrix2)) print("Oops, your matrix isn't a valid stochastic matrix.")
     })
     
     output$desc <- renderText(
@@ -77,6 +76,7 @@ function(input, output, session) {
             else if(input$subfunc == "rtrn") "Probabilities of returning to the initial state after infinite time"
           }
         }
+        else "Please ensure that all row sums are equal to 1."
       }
     )
     
@@ -91,11 +91,17 @@ function(input, output, session) {
             else "No absorbing states"
           }
           else if(input$func == "n_steps"){
-            mtx = input$matrix2;
-            for(i in 1:input$n -1){
-              mtx = mtx %*% input$matrix2
+            if(input$n < 1){
+              "Please enter an integer >= 1"
             }
-            mtx
+            else{
+              p <- dim(input$matrix2)[1]
+              mtx = diag(1,p,p);
+              for(i in 1:input$n ){
+                mtx = mtx %*% input$matrix2
+              }
+              mtx
+            }
           }
           else if(input$func == "steady"){
             if(input$subfunc == "stat"){
@@ -111,6 +117,11 @@ function(input, output, session) {
           }
           
         }
+      else{
+        mtx <- matrix(rowSums(input$matrix2));
+        colnames(mtx) = "Row sums";
+        mtx
+      }
       })
     
     output$visual <- renderPlot({
@@ -133,19 +144,13 @@ function(input, output, session) {
           matrix_data <- new
           distinct_values <- unique(as.vector(matrix_data))
           
-          # Define a custom color palette
           num_colors <- length(distinct_values)
           color_palette <- rainbow(num_colors)
           
-          # Convert matrix to dataframe
           df <- data.frame(matrix_data)
           df$row <- factor(rownames(df), levels = rev(rownames(df)))
           
-          # Reshape data to long format
-          
           df_long <- gather(df, col, value, -row)
-          
-          # Map integers to colors
           df_long$color <- ifelse(df_long$value == 0, "0", as.character(df_long$value))
           
           # Plot the grid

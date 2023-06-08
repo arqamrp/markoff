@@ -5,10 +5,9 @@ account: arqam
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9258106
-bundleId: 7312478
+bundleId: 7319402
 url: https://arqam.shinyapps.io/markoff/
-when: 1686076275.6152
-lastSyncTime: 1686076275.61521
+when: 1686196882.55624
+lastSyncTime: 1686196882.55631
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: packages
