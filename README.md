@@ -35,6 +35,3 @@ The [markoffchains](/markoffchains) folder contains the package files and the pd
 
 ![](/assets/stat.png)
 
-#### Returning probabilities (lim(n->inf) p_jj n)
-
-![](/assets/rtrn.png)
